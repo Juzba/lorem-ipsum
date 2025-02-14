@@ -10,6 +10,9 @@ const Form = () => {
 		e.preventDefault();
 		console.log("spusteno");
 		setString(Functions.paragrafGenerator(number));
+        // const word = Functions.wordGenerator()
+        // console.log(word);
+        
 	};
 
 	return (
@@ -21,7 +24,7 @@ const Form = () => {
 				<input type='submit' value='Vygenerovat'></input>
 			</form>
 			{string.map((item, index) => {
-				return <p key={index}>{item}</p>;
+				return <p key={index}>{`${index + 1})   ${item}`}</p>;
 			})}
 		</section>
 	);

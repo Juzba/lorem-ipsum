@@ -1,78 +1,84 @@
 class name {
-	static random = (minValue, maxValue) => {
-		const num = maxValue - minValue;
+    static random = (minValue, maxValue) => {
+        const num = maxValue - minValue;
 
-		let cislo = Math.random() * 100;
-		if (cislo > num) cislo %= num;
-		cislo += minValue;
+        let cislo = Math.random() * 100;
+        if (cislo > num) cislo %= num;
+        cislo += minValue;
 
-		return cislo.toFixed(0);
-	};
+        return cislo.toFixed(0);
+    };
 
-	static wordGenerator = () => {
-		const alphabet = "aabcdefghijklmnopqrstuvwxyz";
-		let count = 0;
-		let word = "";
+    static wordGenerator = () => {
+        const souhlasky = 'bcdfghjklmnpqrstvwxzb';
+        const samohlasky = 'yaeiouy';
+        const spojky = ['a', 'or', 'and', 'at', 'are', 'in', 'are', 'on', 'by', 'u', 'nor', 'why'];
+        let count = 0;
+        let word = '';
 
-		const maxCountWord = this.random(3, 9);
+        const maxCountWord = this.random(1, 9);
 
-		do {
-			word += alphabet[this.random(0, alphabet.length - 1)];
-			++count;
-		} while (count < maxCountWord);
+        do {
+            if (count !== 0 && maxCountWord < 4) {word = spojky[this.random(0, spojky.length - 1)]; break}
+            else if (count % 2 === 0) word += souhlasky[this.random(0, souhlasky.length - 1)];
+            else word += samohlasky[this.random(0, samohlasky.length - 1)];
 
-		return word;
-	};
+            ++count;
+        } while (count < maxCountWord);
 
-	static wordArrayGenerator = () => {
-		let veta = [];
-		const maxCountVeta = this.random(6, 15);
+        return word;
+    };
 
-		do {
-			veta = [...veta, this.wordGenerator()];
-		} while (veta.length < maxCountVeta);
+    static wordArrayGenerator = () => {
+        let veta = [];
+        const maxCountVeta = this.random(6, 20);
 
-		return veta;
-	};
+        do {
+            veta = [...veta, this.wordGenerator()];
+        } while (veta.length < maxCountVeta);
 
-	static stringGenerator = () => {
-		let veta = "";
-		this.wordArrayGenerator().forEach((item) => {
-			veta = veta + " " + item;
-		});
-		veta += ". ";
-		veta = veta.trimStart();
+        return veta;
+    };
 
-		return veta.replace(veta[0], veta[0].toUpperCase());
-	};
+    static stringGenerator = () => {
+        let veta = '';
+        this.wordArrayGenerator().forEach((item) => {
+            veta = veta + ' ' + item;
+        });
+        veta += '. ';
+        veta = veta.trimStart();
 
-	static oneParagrafGenerator = () => {
-		let paragraf = "";
-		let count = 0;
+        return veta.replace(veta[0], veta[0].toUpperCase());
+    };
 
-		do {
-			paragraf += this.stringGenerator();
-			++count;
-		} while (count < 6);
+    static oneParagrafGenerator = () => {
+        let paragraf = '';
+        let count = 0;
 
-		return paragraf;
-	};
+        do {
+            paragraf += this.stringGenerator();
+            ++count;
+        } while (count < 6);
 
-	static paragrafGenerator = (num) => {
-		if (num < 1 || !num) num = 1;
-		else if (num > 5) num = 5;
+        return paragraf;
+    };
 
-		let paragraf = [];
-		let count = 0;
+    static paragrafGenerator = (num) => {
+        if (num < 1 || !num) num = 1;
+        else if (num > 5) num = 5;
 
-		do {
-			paragraf =[...paragraf ,this.oneParagrafGenerator()]
-			++count;
-		} while (count < num);
+        let paragraf = [];
+        let count = 0;
 
-        console.log(paragraf)
-		return paragraf;
-	};
+        do {
+            paragraf = [...paragraf, this.oneParagrafGenerator()];
+            ++count;
+        } while (count < num);
+
+        paragraf[0] = 'Lorem ipsum. ' + paragraf[0];
+        console.log(paragraf);
+        return paragraf;
+    };
 }
 
 export default name;
