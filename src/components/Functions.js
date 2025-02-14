@@ -12,14 +12,14 @@ class name {
     static wordGenerator = () => {
         const souhlasky = 'bcdfghjklmnpqrstvwxzb';
         const samohlasky = 'yaeiouy';
-        const spojky = ['a', 'or', 'and', 'at', 'are', 'in', 'are', 'on', 'by', 'u', 'nor', 'why'];
+        const spojky = ['a', 'or', 'and', 'at', 'are', 'in', 'are', 'on', 'by', 'u', 'nor', 'why', "v", "na" ];
         let count = 0;
         let word = '';
 
         const maxCountWord = this.random(1, 9);
 
         do {
-            if (count !== 0 && maxCountWord < 4) {word = spojky[this.random(0, spojky.length - 1)]; break}
+            if (maxCountWord < 4) {word = spojky[this.random(0, spojky.length - 1)]; break}
             else if (count % 2 === 0) word += souhlasky[this.random(0, souhlasky.length - 1)];
             else word += samohlasky[this.random(0, samohlasky.length - 1)];
 
@@ -76,7 +76,7 @@ class name {
         } while (count < num);
 
         paragraf[0] = 'Lorem ipsum. ' + paragraf[0];
-        console.log(paragraf);
+        // console.log(paragraf);
         return paragraf;
     };
 }

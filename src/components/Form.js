@@ -9,7 +9,7 @@ const Form = () => {
 	const submitFunc = (e) => {
 		e.preventDefault();
 		console.log("spusteno");
-		setString(Functions.paragrafGenerator(number));
+		setString(Functions.paragrafGenerator(parseInt(number)));
         // const word = Functions.wordGenerator()
         // console.log(word);
         
